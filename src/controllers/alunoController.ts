@@ -20,11 +20,11 @@ export class AlunoController {
     }
 
     create(req: Request, res: Response) : Response {
-        const { ra, name, mail } = req.body;
+        const { ra, nome, email } = req.body;
         const novoAluno: Aluno = {
             ra:ra,
-            nome:name,
-            email:mail 
+            nome:nome,
+            email:email 
         };
         this.alunos.push(novoAluno);
         return res.status(201).json(novoAluno);
@@ -32,12 +32,12 @@ export class AlunoController {
 
     update(req: Request, res: Response): Response {
         const ra = req.params.ra;
-        const {name, mail} = req.body;
+        const {nome, email} = req.body;
 
         const alunoIndex = this.alunos.findIndex(a => a.ra === ra);        
 
         if (alunoIndex > -1) {
-            this.alunos[alunoIndex] = {ra:ra, nome:name, email:mail};
+            this.alunos[alunoIndex] = {ra:ra, nome:nome, email:email};
         } else {
             return res.status(404).json({"message": "Aluno não encontrado"})
         }

@@ -4,7 +4,100 @@ import {AlunoController} from "../controllers/AlunoController";
 const alunoRouter = Router();
 const aluno = new AlunoController();
 
+/**
+ * @swagger
+ * components:
+ *  schemas:
+ *      Aluno:
+ *          type: object
+ *          required:
+ *              - ra
+ *              - nome
+ *              - email
+ *          properties:
+ *              ra:
+ *                  type: string
+ *                  description: identificador escolar
+ *              nome:
+ *                  type: string
+ *                  description: nome do aluno
+ *              email:
+ *                  type: string
+ *                  description: e-mail do aluno
+ */
+
+/**
+ * @swagger
+ * /aluno:
+ *  get:
+ *      summary: Lista todos os alunos
+ *      tags: [Alunos]
+ *      responses:
+ *          200:
+ *              description: Lista de alunos
+ *              content:
+ *                  application/json:
+ *                      schema:
+ *                          type: array
+ *                          items:
+ *                              $ref: '#/components/schemas/Aluno'
+ */
 alunoRouter.get("/", (req, res) => aluno.get(req, res));
+
+/**
+ * @swagger
+ * /aluno:
+ *  post:
+ *      summary: Criar um aluno
+ *      tags: [Alunos]
+ *      requestBody:
+ *          required: true
+ *          content:
+ *               application/json:
+ *                  schema:
+ *                      $ref: '#/components/schemas/Aluno'
+ *      responses:
+ *          201:
+ *              description: Aluno Criado
+ *              content:
+ *                  application/json:
+ *                      schema:
+ *                          $ref: '#/components/schemas/Aluno'
+ */
 alunoRouter.post("/", (req, res) => aluno.create(req, res));
+
+/**
+ * @swagger
+ * /aluno/{ra}:
+ *  put:
+ *      summary: Atualiza um aluno
+ *      tags: [Alunos]
+ *      parameters:
+ *          - in: path
+ *            name: ra
+ *            schema:
+ *              type: string
+ *            required: true
+ *      requestBody:
+ *          required: true
+ *          content:
+ *               application/json:
+ *                  schema:
+ *                      type: object
+ *                      properties:
+ *                          nome:
+ *                              type: string
+ *                          email:
+ *                              type: string
+ *      responses:
+ *          200:
+ *              description: Aluno atualizado com Sucesso
+ *              content:
+ *                  application/json:
+ *                      schema:
+ *                          $ref: '#/components/schemas/Aluno'
+ *          404:
+ *              description: Aluno não encontrado
+ */
 alunoRouter.put("/:ra", (req, res) => aluno.update(req, res));
 export default alunoRouter;
