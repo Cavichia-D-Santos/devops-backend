@@ -1,9 +1,9 @@
-import { Request, Response } from "express"
+import { Request, Response } from "express";
 
 interface Aluno {
     ra: string,
     nome: string,
-    email: string
+    email: string;
 }
 
 export class alunoController {

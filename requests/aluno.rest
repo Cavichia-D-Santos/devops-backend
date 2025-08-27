@@ -6,8 +6,8 @@ POST http://localhost:3000/aluno HTTP/1.1
 Content-Type: application/json
 
 {
-    "ra": "321",
-    "nome": "miguel",
+    "ra": "3",
+    "nome": "gustavo",
     "email": "miguelzito@gmail.com"
 }
 
