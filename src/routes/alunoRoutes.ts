@@ -1,8 +1,10 @@
 import {Router} from "express";
 import {AlunoController} from "../controllers/alunoController";
+import { authMiddleware } from "../middlewares/auth";
 
 const alunoRouter = Router();
 const aluno = new AlunoController();
+alunoRouter.use(authMiddleware);
 
 /**
  * @swagger
