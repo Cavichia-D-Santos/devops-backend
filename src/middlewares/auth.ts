@@ -8,7 +8,8 @@ export interface AuthRequest extends Request {
 }
 
 export const authMiddleware = (req: AuthRequest, res: Response, next: NextFunction) => {
-    const token = req.header('Authorization');
+    const authHeader = req.header('Authorization');
+    const token = authHeader?.startsWith('Bearer ') ? authHeader.substring(7) : authHeader;
 
     console.log('---- header token', token)
 

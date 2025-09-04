@@ -1,5 +1,5 @@
 import {Router} from "express";
-import {AlunoController} from "../controllers/AlunoController";
+import {AlunoController} from "../controllers/alunoController";
 import { authMiddleware } from "../middlewares/auth";
 
 const alunoRouter = Router();
@@ -35,6 +35,8 @@ const aluno = new AlunoController();
  *  get:
  *      summary: Lista todos os alunos
  *      tags: [Alunos]
+ *      security:
+ *        - bearerAuth: []
  *      responses:
  *          200:
  *              description: Lista de alunos
@@ -44,6 +46,8 @@ const aluno = new AlunoController();
  *                          type: array
  *                          items:
  *                              $ref: '#/components/schemas/Aluno'
+ *          401:
+ *              description: Token não informado
  */
 alunoRouter.get("/", (req, res) => aluno.get(req, res));
 
@@ -53,6 +57,8 @@ alunoRouter.get("/", (req, res) => aluno.get(req, res));
  *  post:
  *      summary: Criar um aluno
  *      tags: [Alunos]
+ *      security:
+ *        - bearerAuth: []
  *      requestBody:
  *          required: true
  *          content:
@@ -66,6 +72,8 @@ alunoRouter.get("/", (req, res) => aluno.get(req, res));
  *                  application/json:
  *                      schema:
  *                          $ref: '#/components/schemas/Aluno'
+ *          401:
+ *              description: Token não informado
  */
 alunoRouter.post("/", (req, res) => aluno.create(req, res));
 
@@ -75,6 +83,8 @@ alunoRouter.post("/", (req, res) => aluno.create(req, res));
  *  put:
  *      summary: Atualiza um aluno
  *      tags: [Alunos]
+ *      security:
+ *        - bearerAuth: []
  *      parameters:
  *          - in: path
  *            name: ra
@@ -101,6 +111,8 @@ alunoRouter.post("/", (req, res) => aluno.create(req, res));
  *                          $ref: '#/components/schemas/Aluno'
  *          404:
  *              description: Aluno não encontrado
+ *          401:
+ *              description: Token não informado
  */
 alunoRouter.put("/:ra", (req, res) => aluno.update(req, res));
 export default alunoRouter;
